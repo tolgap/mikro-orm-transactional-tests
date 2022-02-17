@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    platform: linux/x86_64
+    restart: unless-stopped
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mikroormtrxtests
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
